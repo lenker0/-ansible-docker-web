@@ -18,3 +18,9 @@
     dest: /etc/nginx/sites-enabled/
     state: link
   become: yes
+
+- name: Запустить контейнеры с использованием docker-compose
+  command: docker-compose up --build -d
+  args:
+    chdir: ./ansible-docker-web
+  become: yes
