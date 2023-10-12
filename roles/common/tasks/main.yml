@@ -4,7 +4,6 @@
     src: files/nginx.conf
     dest: /etc/nginx/nginx.conf
   notify: Перезапустить Nginx
-  become: yes
 
 - name: Установка Docker и Docker Compose
   apt:
@@ -13,10 +12,8 @@
   loop:
     - docker.io
     - docker-compose
-  become: yes
 
 - name: Запуск Docker сервиса
   service:
     name: docker
     state: started
-  become: yes
