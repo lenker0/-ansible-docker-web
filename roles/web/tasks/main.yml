@@ -1,0 +1,20 @@
+---
+- name: Копирование файлов веб-приложения
+  copy:
+    src: files/
+    dest: /var/www/html/
+  become: yes
+
+- name: Генерация конфигурационного файла Nginx
+  template:
+    src: templates/nginx-site.conf.j2
+    dest: /etc/nginx/sites-available/myapp
+  notify: Перезапустить Nginx
+  become: yes
+
+- name: Создание символической ссылки для конфигурации Nginx
+  file:
+    src: /etc/nginx/sites-available/myapp
+    dest: /etc/nginx/sites-enabled/
+    state: link
+  become: yes

@@ -1,0 +1,7 @@
+---
+- name: Установка и запуск докеризированного веб-приложения
+  hosts: web_servers
+  become: yes
+  roles:
+    - common
+    - web
