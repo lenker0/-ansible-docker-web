@@ -1,0 +1,16 @@
+---
+- name: Создание Dockerfile
+  copy:
+    src: files/Dockerfile
+    dest: /path/to/your/dockerfile/Dockerfile
+
+- name: Создание файла конфигурации PHP
+  template:
+    src: templates/php.ini.j2
+    dest: /path/to/php/conf/php.ini
+
+- name: Сборка Docker-образа PHP
+  docker_image:
+    name: my_php
+    source: build
+    path: /path/to/your/dockerfile

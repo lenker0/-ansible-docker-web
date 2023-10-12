@@ -1,0 +1,16 @@
+---
+- name: Создание Dockerfile
+  copy:
+    src: files/Dockerfile
+    dest: /path/to/your/dockerfile/Dockerfile
+
+- name: Создание конфигурации Nginx
+  template:
+    src: templates/nginx.conf.j2
+    dest: /path/to/nginx/conf/nginx.conf
+
+- name: Сборка Docker-образа Nginx
+  docker_image:
+    name: my_nginx
+    source: build
+    path: /path/to/your/dockerfile

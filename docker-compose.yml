@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  nginx:
+    image: my_nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - nginx-config:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - mynetwork
+
+  php:
+    image: my_php:latest
+    volumes:
+      - php-config:/usr/local/etc/php
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+
+  mysql:
+    image: my_mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
+volumes:
+  nginx-config:
+  php-config:
+  mysql-data:

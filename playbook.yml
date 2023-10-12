@@ -1,7 +1,22 @@
 ---
-- name: Установка и запуск докеризированного веб-приложения
-  hosts: web_servers
+- name: Разворачиваем веб-приложение
+  hosts: your_remote_server
   become: yes
+
   roles:
-    - common
-    - web
+    - nginx
+    - php
+    - mysql
+
+  tasks:
+    - name: Копируем файл Docker Compose на сервер
+      copy:
+        src: ./docker-compose.yml
+        dest: /path/to/docker-compose/docker-compose.yml
+        remote_src: yes
+      become: yes
+
+    - name: Запуск Docker Compose
+      command: docker-compose up -d
+      become: yes
+      

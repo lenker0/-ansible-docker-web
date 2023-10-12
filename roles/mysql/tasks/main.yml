@@ -1,0 +1,16 @@
+---
+- name: Создание Dockerfile
+  copy:
+    src: files/Dockerfile
+    dest: /path/to/your/dockerfile/Dockerfile
+
+- name: Создание файла конфигурации MySQL
+  template:
+    src: templates/my.cnf.j2
+    dest: /path/to/mysql/conf/my.cnf
+
+- name: Сборка Docker-образа MySQL
+  docker_image:
+    name: my_mysql
+    source: build
+    path: /path/to/your/dockerfile
